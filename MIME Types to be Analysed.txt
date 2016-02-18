@@ -1,5 +1,5 @@
 -- These are the chosen 15 file types that will be analysed using various Frequency Modeling techniques- BFA, FHA.
--- These are some of the MIME types are detected by Apache Tika on TREC Polar Dataset.
+-- These MIME types are detected by Apache Tika on TREC Polar Dataset.
 
 application/octet-stream
 application/zip

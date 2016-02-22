@@ -1,6 +1,6 @@
 import json
 
-input_file=open('application%2Frtf.json','r')
+input_file=open('chosenFileTypes//application%2Frtf.json','r')
 typeJson = json.loads(input_file.read())
 input_file.close()
 

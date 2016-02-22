@@ -14,5 +14,5 @@ audio/mpeg
 video/quicktime
 text/html
 text/plain
-text/matlab
+text/x-matlab
 message/rfc822

@@ -3,6 +3,7 @@
 
 import json
 from itertools import imap
+import math
 
 def bfcPearsonCoeff(x, y):
   n = len(x)
@@ -31,6 +32,7 @@ for i in range(0,256):
        byteFreq.append(0)
 
 output_file=open('application%2Fbfc.txt','a') # change to name of file to whatever you want
+output_file2=open('application%2Fbfc_corelation.json','a')
 
 for k in range(0,len(typeJson['test'])):
     #filePath='anagram_out.txt'
@@ -53,7 +55,10 @@ for k in range(0,len(typeJson['test'])):
     print bfcPearsonCoeff(byteFreq,BFA)
     stroutput=""
     stroutput=stroutput+filepath+" "+ bfcPearsonCoeff(byteFreq,BFA)+"\n"
-    #keys=json.dumps(byteFreq, sort_keys=True)
+    bfc_corelation= [abs(i - j) for i, j in zip(byteFreq, BFA)]
+    keys=json.dumps(bfc_corelation, sort_keys=True)
     output_file.write(stroutput)
+    output_file2.write(keys)
 
 output_file.close()
+output_file2.close()

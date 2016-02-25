@@ -33,9 +33,9 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
         typeOfFile=str(typeJson['type'])
         qq=typeOfFile.find("/")
         
-        f=open('json_outputs/bfa_signature_'+typeOfFile[0:qq]+"_"+typeOfFile[qq+1:]+'.json','r')
-        BFA = json.loads(f.read())
-        f.close()
+        fp=open('json_outputs/bfa_signature_'+typeOfFile[0:qq]+"_"+typeOfFile[qq+1:]+'.json','r')
+        BFA = json.loads(fp.read())
+        fp.close()
    
         byteFreq=[]
         for i in range(0,256):

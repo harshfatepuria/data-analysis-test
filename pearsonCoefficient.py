@@ -41,7 +41,7 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
         for i in range(0,256):
             byteFreq.append(0)
    
-        outFile='pearson_Coefficient/bfa_signature_'+typeOfFile[0:qq]+"_"+typeOfFile[qq+1:]+'.json'
+        outFile='pearson_Coefficient/correlation_coef_'+typeOfFile[0:qq]+"_"+typeOfFile[qq+1:]+'.txt'
         output_file=open(outFile,'a')
         
         
@@ -73,13 +73,5 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
                 stroutput=stroutput+filepath+" "+ bfcPearsonCoeff(byteFreq,BFA)+"\n"
                 output_file.write(stroutput)
 
-                #byteFreqSignature= #Get signature from stored info
-   
-        #maxFreq=max(byteFreqSignature)
-        #for i in range(0,256):
-            #byteFreqSignature[i]=byteFreqSignature[i]/float(maxFreq)
-   
-        #keys=json.dumps(byteFreqSignature, sort_keys=True)
-        #output_file.write(keys)
         output_file.close()
 

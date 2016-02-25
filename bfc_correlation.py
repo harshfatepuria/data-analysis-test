@@ -7,6 +7,7 @@ import math
 from itertools import imap
 import math
 import sys
+import os
 
 def bfcPearsonCoeff(x, y):
   n = len(x)
@@ -29,8 +30,8 @@ byteFreq=[]
 for i in range(0,256):
        byteFreq.append(0)
 
-output_file=open('bfc_corelation_difference_output.json','a') # change to name of file to whatever you want
-output_file2=open('bfc_corelation_values_output.json','a')
+output_file=open('bfc_corelation_difference_output.json','w') # change to name of file to whatever you want
+output_file2=open('bfc_corelation_values_output.json','w')
 
 f=open(input_file,'rb')
 data=f.read()
@@ -45,7 +46,7 @@ maxFreq=max(byteFreq)
 for i in range(0,256):
     byteFreq[i]=byteFreq[i]/maxFreq
     
-typeOfFile=str(argv[1])
+typeOfFile=str(input_file_type)
 qq=typeOfFile.find("/")
 
 #Get BFA of the file type in variable BFA
@@ -53,7 +54,7 @@ fp=open('json_outputs/bfa_signature_'+typeOfFile[0:qq]+"_"+typeOfFile[qq+1:]+'.j
 BFA = json.loads(f.read())
 fp.close()
 
-print "BFC CORELATION CO-EFFICIENT: ", bfcPearsonCoeff(byteFreq,BFA)
+print "BFC PEARSON CORELATION COEFFICIENT: ", bfcPearsonCoeff(byteFreq,BFA)
 
 bfc_corelation= [abs(i - j) for i, j in zip(byteFreq, BFA)]
 keys=json.dumps(bfc_corelation, sort_keys=True)

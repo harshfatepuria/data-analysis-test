@@ -42,14 +42,13 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
             byteFreq.append(0)
    
         outFile='pearson_Coefficient/correlation_coef_'+typeOfFile[0:qq]+"_"+typeOfFile[qq+1:]+'.txt'
-        output_file=open(outFile,'a')
+        output_file=open(outFile,'w')
         
         
         for k in range(0,len(typeJson['test'])):
             
             filePath=sourcePath+typeJson['test'][k]
             
-            print typeJson['type']," ",k, " ", (typeJson['trainCount']-1),
             
             for i in range(0,256):
                 byteFreq[i]=0
@@ -58,8 +57,9 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
                 data=input_file.read()
             except:
                 continue
-            print len(data)
             if len(data)>0:
+                print typeJson['type']," ",k, " ", (typeJson['testCount']-1),
+                print len(data),"  ",
                 for j in range(0,len(data)):
                     x=ord(data[j:(j+1)])
                     byteFreq[x]=byteFreq[x]+1
@@ -68,9 +68,9 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
                 for i in range(0,256):
                     byteFreq[i]=byteFreq[i]/float(maxFreq)
                 
-                print bfcPearsonCoeff(byteFreq,BFA)
-                stroutput=""
-                stroutput=stroutput+filepath+" "+ bfcPearsonCoeff(byteFreq,BFA)+"\n"
+                bfcPearson=bfcPearsonCoeff(byteFreq,BFA)
+                print bfcPearson
+                stroutput=typeJson['test'][k]+"\n"+ str(bfcPearson)+"\n\n"
                 output_file.write(stroutput)
 
         output_file.close()

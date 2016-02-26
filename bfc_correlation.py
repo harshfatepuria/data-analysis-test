@@ -9,6 +9,7 @@ import math
 import sys
 import os
 
+
 def bfcPearsonCoeff(x, y):
   n = len(x)
   sumX = float(sum(x))
@@ -22,7 +23,6 @@ def bfcPearsonCoeff(x, y):
   return a / b
 
 
-
 input_file_type= sys.argv[1]
 input_file=sys.argv[2]
 
@@ -30,8 +30,8 @@ byteFreq=[]
 for i in range(0,256):
        byteFreq.append(0)
 
-output_file=open('bfc_corelation_difference_output.json','w') # change to name of file to whatever you want
-output_file2=open('bfc_corelation_values_output.json','w')
+output_file=open('bfc_correlation/bfc_corelation_difference_output.json','w') # change to name of file to whatever you want
+output_file2=open('bfc_correlation/bfc_corelation_values_output.json','w')
 
 f=open(input_file,'rb')
 data=f.read()
@@ -44,17 +44,18 @@ for j in range(0,len(data)):
 maxFreq=max(byteFreq)
 
 for i in range(0,256):
-    byteFreq[i]=byteFreq[i]/maxFreq
+    byteFreq[i]=byteFreq[i]/float(maxFreq)
     
 typeOfFile=str(input_file_type)
 qq=typeOfFile.find("/")
 
 #Get BFA of the file type in variable BFA
 fp=open('json_outputs/bfa_signature_'+typeOfFile[0:qq]+"_"+typeOfFile[qq+1:]+'.json','r')
-BFA = json.loads(f.read())
+BFA = json.loads(fp.read())
+
 fp.close()
 
-print "BFC PEARSON CORELATION COEFFICIENT: ", bfcPearsonCoeff(byteFreq,BFA)
+print "BFC PEARSON CORELATION COEFFICIENT FOR THE FILE TYPE (",input_file_type,"): ", bfcPearsonCoeff(byteFreq,BFA)
 
 bfc_corelation= [abs(i - j) for i, j in zip(byteFreq, BFA)]
 keys=json.dumps(bfc_corelation, sort_keys=True)

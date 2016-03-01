@@ -13,6 +13,27 @@ README 599 #1
 	a.  A summary of the count of different types of files present:  initialSummary.json 
 	b.  A dictionary file for each file type storing the file_type, array of paths to the training data (75%), and array of paths to the testing data (25%)
 	     This file is very important because we refer to it for the paths to each file in a particular type.
+		 
+	Files Preparation
+	1) To detect file types and generate json files
+		java typedetect.runner.TypeDetectRunner
+	Arguments:
+		-data		base data folder
+		-output		folder to store output json files
+		-mimetype	path to custom mimetype.xml (optional)
+					default: use tika default tika-mimetype.xml
+	Files generated as output:
+		summary.json		summary of mime diversity
+		allRecords.json		indicates detected type of each file
+		byType/*.json		list of files path for each detected type
+	
+	2) To separate files for each type to test and train data (75%-25% ratio except for application/octet-stream)
+		java typedetect.runner.SeparateTestTrainDataRunner
+	Arguments:
+		-byType	folder that contains list of files path for each detected type (output from 1)
+		-output	folder to store output json files
+	Files generated as output:
+		*.json		list of files path, separated to test and train data, for each type
 
 
 
@@ -33,6 +54,32 @@ README 599 #1
 	We use D3 Heat map visualization to depict the FHT sparse matrix in D3_FHT_Signature_heatMap.html for all the 15 types.
 
 10. EXTRA CREDIT README
+
+	10.1 Clustering using Tika-Similarity
+		After placing modified source code in Tika-Similarity project. We can run these script.
+		1) Clustering - run k-means.py to do clustering using different distance measures
+			python k-means.py
+		Arguments:
+			--inputDir	path to directory containing files to cluster
+			--measure	specified distance measure
+						0 - Euclidean, 1 - Cosine, 2 - Edit (default: 0)
+		Output:
+			cluster.json	clustering result
+
+		2) Circle Packing - using clustering result (using cluster.json file generated from k-means.py)
+			python circle-packing-json.py
+		Output:
+			circle.json	circle packing result
+	
+	10.2 Content Based MIME Detection
+		1) Prepare datasets by running a java class (Arguments still hard coded)
+			java nnmodel.runner.CreateNNDatasetRunner
+		2) After placing modified R scripts and data files in "filetypeDetection" project, we can run R script to train neural network model
+			source('main2.r', echo = T)  in R Console
+		3) Use the model to do type detection by running a java class (Arguments still hard coded)
+			java nnmodel.runner.NNBasedTypeDetectRunner
+
+
 
 
 

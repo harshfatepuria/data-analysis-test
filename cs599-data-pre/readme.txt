@@ -1,3 +1,4 @@
+Files Preparation
 1) To detect file types and generate json files
 java typedetect.runner.TypeDetectRunner
 Arguments:
@@ -20,6 +21,8 @@ Arguments:
 
 Files generated as output
 *.json	list of files path, separated to test and train data, for each type
+
+Content-based detection - Neural Network model
 
 Note:
 This is a Maven project. If the codes does not run properly via command line, 

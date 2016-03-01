@@ -27,8 +27,8 @@ public class BFA {
 	}
 	
 	private void calculateByteFrequencies(byte[] data) {
-		for(Byte b : data) {
-			Integer unsignedB = b &0xff; /* convert to unsigned byte */
+		for(Byte byt : data) {
+			Integer unsignedB = byt &0xff; /* convert to unsigned byte */
 			frequencies[unsignedB]+= 1;
 		}
 	}

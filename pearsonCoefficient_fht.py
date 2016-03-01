@@ -37,8 +37,14 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
         FHT = json.loads(f.read())
         f.close()
         
-        FHT_MAX_VALUES= [FHT["0"],FHT["1"],FHT["2"],FHT["3"],FHT["4"],FHT["5"],FHT["6"],FHT["7"],FHT["8"],FHT["9"],FHT["10"],FHT["11"],FHT["12"],FHT["13"],FHT["14"],FHT["15"]]
-   
+        FHT_MAX_VALUES=[]
+        fht_bytes= [FHT["0"],FHT["1"],FHT["2"],FHT["3"],FHT["4"],FHT["5"],FHT["6"],FHT["7"],FHT["8"],FHT["9"],FHT["10"],FHT["11"],FHT["12"],FHT["13"],FHT["14"],FHT["15"]]
+        for i in fht_bytes:
+          max_value=max(i)
+          max_index=i.index(max_value)
+          FHT_MAX_VALUES.append(max_index)
+        print FHT_MAX_VALUES
+        
         byteFreq=[]
         for i in range(0,16):
             byteFreq.append(0)

@@ -11,7 +11,11 @@ import math
 
 fileR='chosenFileTypes'
   
-sourcePath="/Volumes/HARSH/CS599/ORIGINAL/"
+
+pathToDataStream=open("pathToDataSet.txt",'r')
+sourcePath=pathToDataStream.read().replace('\n', '')
+
+#sourcePath="/Volumes/HARSH/CS599/ORIGINAL/"
 
 def bfcPearsonCoeff(x, y):
     n = len(x)

@@ -9,7 +9,11 @@ import math
 
 fileR='chosenFileTypes'
   
-sourcePath="/Volumes/HARSH/CS599/ORIGINAL/"
+
+pathToDataStream=open("pathToDataSet.txt",'r')
+sourcePath=pathToDataStream.read().replace('\n', '')
+
+#sourcePath="/Volumes/HARSH/CS599/ORIGINAL/"
   
 for filepath in iglob(os.path.join(fileR, '*.json')): 
     with open(filepath) as f:

@@ -8,13 +8,12 @@ from itertools import imap
 import math
 
 fileR='chosenFileTypes'
-  
-
+ 
 pathToDataStream=open("pathToDataSet.txt",'r')
 sourcePath=pathToDataStream.read().replace('\n', '')
-
-#sourcePath="/Volumes/HARSH/CS599/ORIGINAL/"
   
+#sourcePath="/Volumes/HARSH/CS599/ORIGINAL/"
+
 for filepath in iglob(os.path.join(fileR, '*.json')): 
     with open(filepath) as f:
         typeJson = json.loads(f.read())
@@ -39,10 +38,10 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
         
         for k in range(0,len(typeJson['test'])):
             
-            countFile+=1
+            countFile=countFile +1
             filePath=sourcePath+typeJson['test'][k]
             
-            print typeJson['type']," ",k, " ", (typeJson['trainCount']-1),
+            print typeJson['type']," ",k, " ", (typeJson['testCount']-1),
             
             for i in range(0,256):
                 byteFreq[i]=0
@@ -56,17 +55,31 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
                 for j in range(0,len(data)):
                     x=ord(data[j:(j+1)])
                     byteFreq[x]=byteFreq[x]+1
+                
    
-   
+                maxCC=0;
                 for a in range(0,256):
-                    for b in range(0,256):
+                    for b in range(a,256):
                         if(b>a):
-                            crossMatrix[a][b]+= abs(byteFreq[a]-byteFreq[b])
+                            crossMatrix[a][b]=crossMatrix[a][b]+abs(byteFreq[a]-byteFreq[b])
+                    if(maxCC<max(crossMatrix[a])):
+                        maxCC=max(crossMatrix[a])
+                   
+                for a in range(0,256):
+                    for b in range(a,256):
+                        if(b>a):
+                            crossMatrix[a][b]=crossMatrix[a][b]/float(maxCC)           
+                            
+                
         for a in range(0,256):
-            for b in range(0,256):
-                if(b>a)and countFile!=0:
-                    crossMatrix[a][b]/= float(countFile)
+            for b in range(a,256):
+                if(b>a) and countFile!=0:
+                    crossMatrix[a][b]= crossMatrix[a][b]/float(countFile)
         
-        keys=json.dumps(crossMatrix, sort_keys=True)
+        sparseMatrixDict={}
+        for i in range(256):
+            sparseMatrixDict[i]=crossMatrix[i]
+        
+        keys=json.dumps(sparseMatrixDict, sort_keys=True)
         output_file.write(keys)
         output_file.close()

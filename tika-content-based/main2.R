@@ -17,7 +17,7 @@ source('randInitWeights.R')
 source('checkNNGradients.R')
 source('debugInitializeWeights.R')
 source('computeNumericalGradient.R')
-source('myfunctions.R')
+source('myfunctions2.R')
 library(optimx)
 
 ##############################

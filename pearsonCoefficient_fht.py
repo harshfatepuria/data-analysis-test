@@ -43,21 +43,19 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
           max_value=max(i)
           max_index=i.index(max_value)
           FHT_MAX_VALUES.append(max_index)
-        print FHT_MAX_VALUES
-        
+#         print FHT_MAX_VALUES
         byteFreq=[]
         for i in range(0,16):
             byteFreq.append(0)
    
-        outFile='FHT_4B/fht_analysis_'+typeOfFile[0:qq]+"_"+typeOfFile[qq+1:]+'.json'
-        output_file=open(outFile,'a')
+        outFile='FHT_byte_analysis/fht_analysis_'+typeOfFile[0:qq]+"_"+typeOfFile[qq+1:]+'.txt'
+        output_file=open(outFile,'w')
         
         
         for k in range(0,len(typeJson['test'])):
             
             filePath=sourcePath+typeJson['test'][k]
             
-            print typeJson['type']," ",k, " ", (typeJson['trainCount']-1),
             
             for i in range(0,16):
                 byteFreq[i]=0
@@ -66,18 +64,20 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
                 data=input_file.read()
             except:
                 continue
-            print len(data)
             if len(data)>0:
-                for j in range(0,16):
+                print typeJson['type']," ",k, " ", (typeJson['testCount']-1)
+                ff=16
+                if(len(data)<16):
+                    ff=len(data)
+                for j in range(0,ff):
                     x=ord(data[j:(j+1)])
-                    byteFreq.append(x)
-                    
+                    byteFreq[j]=x
+#                 print byteFreq[0:4]
+#                 print FHT_MAX_VALUES[0:4]
                 x=bfcPearsonCoeff(byteFreq[0:4],FHT_MAX_VALUES[0:4])
                 y=bfcPearsonCoeff(byteFreq[0:8],FHT_MAX_VALUES[0:8])
                 z=bfcPearsonCoeff(byteFreq,FHT_MAX_VALUES)
-                print x
-                stroutput=""
-                stroutput=stroutput+filepath+" "+x+" "+y+" "+z+"\n"
+                stroutput=typeJson['test'][k]+"\n"+str(x)+"  "+str(y)+"  "+str(z)+"\n\n"
                 output_file.write(stroutput)
 
         output_file.close()

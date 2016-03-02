@@ -5344,6 +5344,8 @@
       <match value="&lt;H1" type="string" offset="0"/>
       <match value="&lt;!doctype HTML" type="string" offset="0"/>
       <match value="&lt;!DOCTYPE html" type="string" offset="0"/>
+	  <match value="&lt;script" type="string" offset="0:64"/>
+	  <match value="&lt;SCRIPT" type="string" offset="0:64"/>
     </magic>
     <glob pattern="*.html"/>
     <glob pattern="*.htm"/>

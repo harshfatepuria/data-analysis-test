@@ -1461,7 +1461,7 @@
   <mime-type type="application/vnd.ms-asf"/>
   <mime-type type="application/vnd.ms-cab-compressed">
     <glob pattern="*.cab"/>
-	<magic priority="100">
+	<magic priority="40">
 		<match value="MSCF" type="string" offset="0"/>
 	</magic>
   </mime-type>
@@ -6466,7 +6466,7 @@
   
   <mime-type type="application/x-git-index">
 	<_comment>Git index file</_comment>
-	<magic priority="100">
+	<magic priority="40">
 		<match value="DIRC" type="string" offset="0"/>
 	</magic>
   </mime-type>

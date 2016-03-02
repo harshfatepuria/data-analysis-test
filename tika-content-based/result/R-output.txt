@@ -34,7 +34,7 @@
 
 > source('computeNumericalGradient.R')
 
-> source('myfunctions.R')
+> source('myfunctions2.R')
 
 > library(optimx)
 
@@ -84,20 +84,20 @@
 > nn_params <- t(coef(result))
 
 > print(sprintf('The time taken for training: %f', result$xtimes))
-[1] "The time taken for training: 323.420000"
+[1] "The time taken for training: 2852.430000"
 
 > print(sprintf('The training error cost: %f', result$value))
-[1] "The training error cost: 0.072969"
+[1] "The training error cost: 0.123189"
 
 > valcost <- nnCostFunction(nn_params, hidSize, Xval, yval, lambda)
 
 > testcost <- nnCostFunction(nn_params, hidSize, Xtest, ytest, lambda)
 
 > print(sprintf('The validation error cost: %f', valcost))
-[1] "The validation error cost: 0.528550"
+[1] "The validation error cost: 0.356736"
 
 > print(sprintf('The testing error cost: %f', testcost))
-[1] "The testing error cost: 1.081071"
+[1] "The testing error cost: 0.433588"
 
 > #print(result$convcode)
 > n1 <- n * hidSize
@@ -111,21 +111,20 @@
 > pred <- nnPredict(Theta1, Theta2, X)
 
 > print(sprintf('Training Accuracy: %f', mean((pred == y)) * 100))
-[1] "Training Accuracy: 98.270000"
+[1] "Training Accuracy: 95.646000"
 
 > pred <- nnPredict(Theta1, Theta2, Xval)
 
 > print(sprintf('Validation Accuracy: %f', mean((pred == yval)) * 100))
-[1] "Validation Accuracy: 85.780000"
+[1] "Validation Accuracy: 88.033000"
 
 > pred <- nnPredict(Theta1, Theta2, Xtest)
 
 > print(sprintf('Testing Accuracy: %f', mean((pred == ytest)) * 100))
-[1] "Testing Accuracy: 69.430000"
+[1] "Testing Accuracy: 84.026000"
 
 > ##############################
 > ###### learning curve ########
 > ##############################
 > #valres <- learningCurveNN(hidSize, X=X, y=y, Xva .... [TRUNCATED] 
 There were 50 or more warnings (use warnings() to see the first 50)
-> 

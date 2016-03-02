@@ -57,8 +57,6 @@ public class TypeDetectRunner {
 		} else {
 			System.out.println("Using Tika default mimetype.xml");
 		}
-
-//		System.exit(0);
 		
 		List<FileContentType> fileContentTypeList = generateFileContentTypeList(baseFolder, mimetype);
 		

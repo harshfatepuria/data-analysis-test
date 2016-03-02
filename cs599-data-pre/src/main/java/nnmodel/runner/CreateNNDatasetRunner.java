@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,11 +28,25 @@ public class CreateNNDatasetRunner {
 	static String byTypeDir = "C:\\cs599\\polar-json\\byType\\";
 	static String outputDir = "C:\\cs599\\polar-nnmodel\\dataset\\";
 	static String positiveType = "application/xhtml+xml";
-	static String[] negativeTypes = new String[] {"application/pdf", "image/jpeg", "application/xml", "text/html", "text/plain" };
-	static Integer positiveSize = 5000;
-	static Integer negativeSize = 1000;
+	static String[] negativeTypes = new String[] {"application/pdf", "image/jpeg", "image/gif", "text/html", "text/plain" };
+	static Integer positiveSize = 50000;
+	static Integer negativeSize = 10000;
 	
-	public static void main(String args[]) throws JsonParseException, JsonMappingException, UnsupportedEncodingException, IOException {
+	public static void main(String args[]) throws JsonParseException, JsonMappingException, UnsupportedEncodingException, IOException, ParseException {
+		CommandLine cmd = parseCommand(args);
+		
+		if (cmd.hasOption("data")) {
+			dataDir = cmd.getOptionValue("data");
+		}
+		
+		if (cmd.hasOption("byType")) {
+			byTypeDir = cmd.getOptionValue("byType");
+		}
+		
+		if (cmd.hasOption("output")) {
+			outputDir = cmd.getOptionValue("output");
+		}
+		
 		Map<String, ArrayList<String>> train = new HashMap<String, ArrayList<String>>();
 		Map<String, ArrayList<String>> test = new HashMap<String, ArrayList<String>>();
 		Map<String, ArrayList<String>> val = new HashMap<String, ArrayList<String>>();
@@ -108,4 +128,18 @@ public class CreateNNDatasetRunner {
 			e.printStackTrace();
 		} 
 	}
+	
+	private static CommandLine parseCommand(String[] args) throws ParseException {
+		Options options = new Options();
+		options.addOption("data", true, "base data folder");
+		options.addOption("byType", true, "folder of json file by type");
+		options.addOption("output", true, "folder to store output json files");
+		
+		
+		CommandLineParser parser = new DefaultParser();
+		CommandLine cmd = parser.parse(options, args);
+		
+		return cmd;
+	}
+	
 }

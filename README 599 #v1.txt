@@ -1,4 +1,4 @@
-README 599 #1
+﻿README 599 #1
 
 
 1. We use D3 on the file distribution available in GitHub to create a Pie chart (completeDataPieChart.html) indicating the existing MIME diversity of the TREC- DD-Polar dataset
@@ -74,10 +74,24 @@ README 599 #1
 	10.2 Content Based MIME Detection
 		1) Prepare datasets by running a java class (Arguments still hard coded)
 			java nnmodel.runner.CreateNNDatasetRunner
+		Arguments:
+			-data		base data folder
+			-byType		folder that contains list of files path for each detected type
+			-output		folder to store output json files
+		Output:
+			train.json, val.json, test.json		json file that contains path to files for each type
+			train.data, val.data, test.data		tab separated files, each record contain byte frequency distribution and label
+
 		2) After placing modified R scripts and data files in "filetypeDetection" project, we can run R script to train neural network model
 			source('main2.r', echo = T)  in R Console
+
 		3) Use the model to do type detection by running a java class (Arguments still hard coded)
 			java nnmodel.runner.NNBasedTypeDetectRunner
+		Arguments:
+			-model		path to model file
+			-data 		base data folder
+			-test		path to test dataset json file
+			-output		path to store output file
 
 
 

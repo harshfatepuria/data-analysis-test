@@ -22,8 +22,27 @@ Arguments:
 Files generated as output:
 *.json	list of files path, separated to test and train data, for each type
 
-Content-based detection - Neural Network model
+
+Tika-Content based
+1) Prepare datasets
+java nnmodel.runner.CreateNNDatasetRunner
+Arguments:
+  -data		base data folder
+  -byType	folder that contains list of files path for each detected type
+  -output	folder to store output json files
+
+Files generated as output:
+  train.json, val.json, test.json	json file that contains path to files for each type
+  train.data, val.data, test.data	tab separated files, each record contain byte frequency distribution and label
+
+2) Detect type using neural network model
+java nnmodel.runner.NNBasedTypeDetectRunner
+Arguments:
+  -model	path to model file
+  -data 	base data folder
+  -test		path to test dataset json file
+  -output	path to store output file
 
 Note:
 This is a Maven project. If the codes does not run properly via command line, 
-please open this project in supported IDE and proper dependency management.
+please open this project in supported IDE with proper dependency management.

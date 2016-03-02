@@ -100,10 +100,10 @@ public class NNBasedTypeDetectRunner {
 	
 	private static CommandLine parseCommand(String[] args) throws ParseException {
 		Options options = new Options();
-		options.addOption("model", true, "path to model");
+		options.addOption("model", true, "path to model file");
 		options.addOption("data", true, "base data folder");
-		options.addOption("test", true, "path to test set json");
-		options.addOption("output", true, "path to store output files");
+		options.addOption("test", true, "path to test set json file");
+		options.addOption("output", true, "path to store output file");
 		
 		
 		CommandLineParser parser = new DefaultParser();

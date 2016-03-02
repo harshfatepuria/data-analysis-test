@@ -132,7 +132,7 @@ public class CreateNNDatasetRunner {
 	private static CommandLine parseCommand(String[] args) throws ParseException {
 		Options options = new Options();
 		options.addOption("data", true, "base data folder");
-		options.addOption("byType", true, "folder of json file by type");
+		options.addOption("byType", true, "folder that contains list of files path for each detected type");
 		options.addOption("output", true, "folder to store output json files");
 		
 		

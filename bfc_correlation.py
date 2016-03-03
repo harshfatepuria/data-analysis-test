@@ -9,7 +9,9 @@ import math
 import sys
 import os
 
-
+# Function to calculate Pearson Coefficient
+# @param: two python lists
+# @return: pearson coefficient
 def bfcPearsonCoeff(x, y):
   n = len(x)
   sumX = float(sum(x))
@@ -30,7 +32,7 @@ byteFreq=[]
 for i in range(0,256):
        byteFreq.append(0)
 
-output_file=open('bfc_correlation/bfc_corelation_difference_output.json','w') # change to name of file to whatever you want
+output_file=open('bfc_correlation/bfc_corelation_difference_output.json','w') 
 output_file2=open('bfc_correlation/bfc_corelation_values_output.json','w')
 
 f=open(input_file,'rb')
@@ -43,6 +45,7 @@ for j in range(0,len(data)):
 
 maxFreq=max(byteFreq)
 
+#calculate normalized BFD for a file given as argv[2]
 for i in range(0,256):
     byteFreq[i]=byteFreq[i]/float(maxFreq)
     
@@ -57,6 +60,7 @@ fp.close()
 
 print "BFC PEARSON CORELATION COEFFICIENT FOR THE FILE TYPE (",input_file_type,"): ", bfcPearsonCoeff(byteFreq,BFA)
 
+# Store absolute values of difference between the signature and BFD of file and store in a separate file.
 bfc_corelation= [abs(i - j) for i, j in zip(byteFreq, BFA)]
 keys=json.dumps(bfc_corelation, sort_keys=True)
 output_file.write(keys)

@@ -2,20 +2,22 @@
 
 
 1. We use D3 on the file distribution available in GitHub to create a Pie chart (completeDataPieChart.html) indicating the existing MIME diversity of the TREC- DD-Polar dataset
-2. Please specify the path to the entire dataset in the file named ‘pathToDataSet.txt’
-	Example, /Volumes/HARSH/CS599/ORIGINAL/
 
+2. Please specify the path to the entire dataset in the file named ‘pathToDataSet.txt’
+	Example, 
+
+/Volumes/HARSH/CS599/ORIGINAL/
 
 
 
 3. We used Apache Tika on the entire data set to create the following:
-
 	a.  A summary of the count of different types of files present:  initialSummary.json 
 	b.  A dictionary file for each file type storing the file_type, array of paths to the training data (75%), and array of paths to the testing data (25%)
-	     This file is very important because we refer to it for the paths to each file in a particular type.
+	     This file is very important because we refer it for the paths to each file in a particular MIME type.
 		 
 	Files Preparation
-	1) To detect file types and generate json files
+	a) Build 'cs599-data-pre' as a java project
+	b) To detect file types and generate .json files
 		java typedetect.runner.TypeDetectRunner
 	Arguments:
 		-data		base data folder
@@ -27,7 +29,7 @@
 		allRecords.json		indicates detected type of each file
 		byType/*.json		list of files path for each detected type
 	
-	2) To separate files for each type to test and train data (75%-25% ratio except for application/octet-stream)
+	c) To separate files for each type to test and train data (75%-25% ratio except for application/octet-stream)
 		java typedetect.runner.SeparateTestTrainDataRunner
 	Arguments:
 		-byType	folder that contains list of files path for each detected type (output from 1)
@@ -37,7 +39,8 @@
 
 
 
-4. We choose 15 types of files to work upon (specified in ‘MIME Types to be Analysed.txt’), and store the .json dictionary file (described in 2.b) in a directory named chosenFileTypes
+4. We choose 15 types of files to work upon (specified in ‘MIME Types to be Analysed.txt’), and store the .json dictionary file (described in 3.c) in a directory named 'chosenFileTypes'
+
 5. Perform BFA analysis on 75% of the data set from the chosen 15 types to obtain Byte Frequency Signatures for each file type. For this, execute countByteFreqFile.py. The 15 output .json files are stored in a directory named json_outputs. These output files store an array of size 256 indicating the normalized frequency of the count of each type of byte present in the training files.
 6. The resulting D3 Line Chart for the BFA signatures can be seen in D3_BFA_Signature.html 
 7. We write a program to perform BFC analysis on an input file by comparing it with its BFA signature. For this, execute bfc_correlation.py  with 2 parameters <type of file> <path to file>

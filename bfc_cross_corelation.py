@@ -7,6 +7,7 @@ from compiler.pycodegen import EXCEPT
 from itertools import imap
 import math
 
+# 'chosenFileTypes' has JSON files containing path to training and test data
 fileR='chosenFileTypes'
  
 pathToDataStream=open("pathToDataSet.txt",'r')
@@ -24,7 +25,8 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
         byteFreq=[]
         for i in range(0,256):
             byteFreq.append(0)
-            
+        
+        # generate a 256 X 256 matrix. Mark the lower half as -1    
         crossMatrix=[]
         for i in range(0,256):
             crossMatrix.append([])

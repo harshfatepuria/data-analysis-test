@@ -3,6 +3,10 @@ package typedetect;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Tuple of file type and list of file path
+ *
+ */
 public class FileContentTypeSummary {
 	private String type;
 	private List<String> files;
@@ -40,7 +44,5 @@ public class FileContentTypeSummary {
 	}
 	public void setFiles(List<String> files) {
 		this.files = files;
-	}
-	
-	
+	}	
 }

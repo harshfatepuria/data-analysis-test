@@ -3,7 +3,10 @@ package byteanalysis;
 import java.util.Arrays;
 import java.util.function.DoubleBinaryOperator;
 
-
+/**
+ * Byte frequency distribution of a file
+ *
+ */
 public class BFA {
 	private float[] frequencies;
 	

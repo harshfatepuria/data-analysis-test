@@ -23,13 +23,17 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Use trained neural network model with Tika to detect file type
+ *
+ */
 public class NNBasedTypeDetectRunner {
 
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException, ParseException {
-		String modelFile = "C:\\cs599\\polar-nnmodel\\model\\tika-nn-xml.model";
-		String dataDir = "C:\\cs599\\polar-fulldump\\";
-		String testFile = "C:\\cs599\\polar-nnmodel\\dataset\\test.json";
-		String outputFile = "C:\\cs599\\polar-nnmodel\\result\\result-test.txt";
+		String modelFile = "";
+		String dataDir = "";
+		String testFile = "";
+		String outputFile = "";
 		
 		CommandLine cmd = parseCommand(args);
 		
@@ -49,6 +53,7 @@ public class NNBasedTypeDetectRunner {
 			outputFile = cmd.getOptionValue("output");
 		}
 		
+		/* read trained model and use it with Tika */
 		Path modelPath = Paths.get(modelFile);
 		NNExampleModelDetector detector = new NNExampleModelDetector(modelPath);
 
@@ -74,6 +79,7 @@ public class NNBasedTypeDetectRunner {
 					Integer cor = 0;
 					count++;
 					
+					/* detect file type and decide if it is detected correctly */
 					String nnType = tikaNN.detect(file);
 					if (expectPositive) {
 						if (Objects.equals(positiveType, nnType)) {

@@ -3,6 +3,10 @@ package typedetect;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Tuple of file type and list of file path that considered to be training and test dataset
+ *
+ */
 public class TrainTestFileForType {
 	private String type;
 	private List<String> train;
@@ -19,6 +23,10 @@ public class TrainTestFileForType {
 		separateFiles(summary);
 	}
 	
+	/**
+	 * Separate given file paths of a specific type to be training and test dataset
+	 * @param summary
+	 */
 	private void separateFiles(FileContentTypeSummary summary) {
 		Integer trainCount;
 		Integer testCount;

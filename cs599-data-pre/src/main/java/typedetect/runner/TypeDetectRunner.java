@@ -25,13 +25,17 @@ import typedetect.FileContentType;
 import typedetect.FileContentTypeSummary;
 import typedetect.JsonWriterUtils;
 
-
+/**
+ * Use Apache Tika to detect file types and output json files containing types and path of each file.
+ *
+ */
 public class TypeDetectRunner {
+	
 	public static void main(String[] args) throws ParseException, MimeTypeException, IOException {
 		CommandLine cmd = parseCommand(args);
 		
-		String baseFolder = "C:\\cs599\\polar-fulldump";
-		String jsonFolder = "C:\\cs599\\polar-json";
+		String baseFolder = "";
+		String jsonFolder = "";
 	
 		if (cmd.hasOption("data")) {
 			baseFolder = cmd.getOptionValue("data");
@@ -39,10 +43,6 @@ public class TypeDetectRunner {
 	
 		if (cmd.hasOption("output")) {
 			jsonFolder = cmd.getOptionValue("output");
-		}
-		
-		if (!jsonFolder.endsWith("\\")) {
-			jsonFolder += "\\";
 		}
 		
 		String jsonByTypeFolder = jsonFolder + "byType";
@@ -67,6 +67,7 @@ public class TypeDetectRunner {
 		Map<String, FileContentTypeSummary> summaryMap = generateFileContentTypeSummaryMap(fileContentTypeList);
 		System.out.println("summaryMap generated");
 		
+		/* create a json file for each type */
 		summaryMap.values().stream().forEach(sum -> {
 			try {
 				String fileName = JsonWriterUtils.urlEncode(sum.getType());
@@ -79,6 +80,7 @@ public class TypeDetectRunner {
 			
 		});
 		
+		/* create a summary file */
 		SortedMap<String, Integer> typeCount = new TreeMap<>();
 		summaryMap.values().forEach(sum -> {
 			typeCount.put(sum.getType(), sum.getCount());
@@ -98,6 +100,14 @@ public class TypeDetectRunner {
 		return cmd;
 	}
 	
+	/**
+	 * Walks the base folder, detect their file type using Tika and generated a list of tuples
+	 * @param baseFolder base folder of files to be detected
+	 * @param mimetype path to custom tika-mimetype.xml (if null, use Tika default mimetype.xml
+	 * @return List of tuples, file path and its type
+	 * @throws MimeTypeException
+	 * @throws IOException
+	 */
 	private static List<FileContentType> generateFileContentTypeList(String baseFolder, String mimetype) throws MimeTypeException, IOException {
 		List<FileContentType> list = new ArrayList<>();
 		
@@ -134,6 +144,11 @@ public class TypeDetectRunner {
 		return list;
 	}
 	
+	/**
+	 * Create a summary map (index file path by detected type) from list of tuple
+	 * @param list List of FileContentType tuple
+	 * @return a summary map
+	 */
 	private static Map<String, FileContentTypeSummary> generateFileContentTypeSummaryMap(List<FileContentType> list) {
 		Map<String, FileContentTypeSummary> map = new HashMap<>();
 		

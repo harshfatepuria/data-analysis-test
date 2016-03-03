@@ -17,24 +17,13 @@ import typedetect.FileContentTypeSummary;
 import typedetect.JsonWriterUtils;
 import typedetect.TrainTestFileForType;
 
+/**
+ * Separate file path of each type to training and test dataset
+ *
+ */
 public class SeparateTestTrainDataRunner {
 	public static void main(String[] args) throws ParseException {
 		CommandLine cmd = parseCommand(args);
-		
-		/*
-		String jsonBaseFolder = "C:\\cs599\\polar-json\\";
-		
-		if (args.length >= 1) {
-			jsonBaseFolder = args[0];
-		}
-		
-		if (!jsonBaseFolder.endsWith("\\")) {
-			jsonBaseFolder += "\\";
-		}
-		
-		String jsonByTypeFolder = jsonBaseFolder + "byType";
-		String jsonOutputFolder = jsonBaseFolder + "trainTest";
-		*/
 		
 		String jsonByTypeFolder = cmd.getOptionValue("byType");
 		String jsonOutputFolder = cmd.getOptionValue("output");
@@ -43,6 +32,7 @@ public class SeparateTestTrainDataRunner {
 		System.out.println("output folder " + jsonOutputFolder);
 		
 		ObjectMapper mapper = new ObjectMapper();
+		/* read each json file in the folder, create new json file that contain training and test dataset */
 		try {
 			Files.walk(Paths.get(jsonByTypeFolder))
 				.filter(p -> {

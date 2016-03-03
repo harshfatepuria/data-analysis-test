@@ -1,12 +1,15 @@
 package typedetect;
 
+/**
+ * Tuple of file path and its type
+ *
+ */
 public class FileContentType {
 	private String key;
 	private String type;
-//	private Integer fragment;
 	
 	public FileContentType() {
-//		fragment = 0;
+		
 	}
 	
 	public FileContentType(String key, String type) {
@@ -27,13 +30,4 @@ public class FileContentType {
 		this.type = type;
 	}
 
-	/*
-	public Integer getFragment() {
-		return fragment;
-	}
-
-	public void setFragment(Integer fragment) {
-		this.fragment = fragment;
-	}
-	*/
 }

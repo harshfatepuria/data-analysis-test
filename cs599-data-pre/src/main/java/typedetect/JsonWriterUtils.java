@@ -10,6 +10,10 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Utility class responsible for writing object to a json file
+ *
+ */
 public class JsonWriterUtils {
 	
 	public static String urlEncode(String url) throws UnsupportedEncodingException {

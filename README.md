@@ -1,20 +1,10 @@
-# data-analysis-test
-test-data-analysis
-
-
-
-README 
-CSCI 599 - Assignment 1 - Team 22
+#CSCI 599 - Assignment 1 - Team 22
 
 
 1. We use D3 on the file distribution available in GitHub to create a Pie chart (completeDataPieChart.html) indicating the existing MIME diversity of the TREC- DD-Polar dataset
 
 2. Please specify the path to the entire dataset in the file named ‘pathToDataSet.txt’
-	Example, 
-
-/Volumes/HARSH/CS599/ORIGINAL/
-
-
+	Example, /Volumes/HARSH/CS599/ORIGINAL/
 
 3. We use Apache Tika on the entire data set to create the following:
 	a.  A summary of the count of different types of files present:  initialSummary.json 
@@ -43,12 +33,15 @@ CSCI 599 - Assignment 1 - Team 22
 	Files generated as output:
 		*.json		list of files path, separated to test and train data, for each type
 
-
-
 4. Choose 15 types of files to work upon (specified in ‘MIME Types to be Analysed.txt’), and store the JSON dictionary file (described in 3.c) in a directory named -- chosenFileTypes
 
+
 5. Perform BFA analysis on 75% of the data set from the chosen 15 types to obtain Byte Frequency Signatures for each file type. For this, execute countByteFreqFile.py. The 15 output .json files are stored in a directory named json_outputs. These output files store an array of size 256 indicating the normalized frequency of the count of each type of byte present in the training files.
+
+
 6. The resulting D3 Line Chart for the BFA signatures can be seen in D3_BFA_Signature.html 
+
+
 7. We write a program to perform BFC analysis on an input file by comparing it with its BFA signature. For this, execute bfc_correlation.py  with 2 parameters <type of file> <path to file>
 
 	Example, python bfc_correlation.py 'application/x-sh' 'org/aoncadis/www/C21774DD044605C31ADAA82A7A81BB7E03175A3875752F6AC3E256118D55D548'
@@ -63,7 +56,6 @@ CSCI 599 - Assignment 1 - Team 22
 
 
 
-
 9. Perform FHT analysis on the training data to get a FHT signature sparse matrix of size 16 X 256 for each of the 15 types of files chosen. For this, execute -- fht_16x256.py -- The resulting outputs are 15 JSON files storing the FHT signatures in the -- fht_output -- directory. 
 	Use D3 Heat map visualization to depict the FHT sparse matrix in -- D3_FHT_Signature_heatMap.html -- for all the 15 types.
 
@@ -71,6 +63,7 @@ CSCI 599 - Assignment 1 - Team 22
 
 	10.1 Clustering using Tika-Similarity
 		After placing modified source code in Tika-Similarity project. We can run these script.
+		
 		1) Clustering - run k-means.py to do clustering using different distance measures
 			python k-means.py
 		Arguments:
@@ -86,6 +79,7 @@ CSCI 599 - Assignment 1 - Team 22
 			circle.json	circle packing result
 	
 	10.2 Content Based MIME Detection
+		
 		1) Prepare datasets by running a java class (Arguments still hard coded)
 			java nnmodel.runner.CreateNNDatasetRunner
 		Arguments:

@@ -9,6 +9,7 @@ from compiler.pycodegen import EXCEPT
 from itertools import imap
 import math
 
+#chosenFileTypes contains JSON files forthe selected MIME types
 fileR='chosenFileTypes'
   
 
@@ -17,6 +18,9 @@ sourcePath=pathToDataStream.read().replace('\n', '')
 
 #sourcePath="/Volumes/HARSH/CS599/ORIGINAL/"
 
+# Pearson Coefficient Function
+# @param: Two lists of equal length
+# @return: Correlation Coefficient [-1,1], -1= Low Correlation and +1= High Correlation
 def bfcPearsonCoeff(x, y):
     n = len(x)
     sumX = float(sum(x))
@@ -33,21 +37,23 @@ def bfcPearsonCoeff(x, y):
 for filepath in iglob(os.path.join(fileR, '*.json')): 
     with open(filepath) as f:
         typeJson = json.loads(f.read())
-  
+        
         typeOfFile=str(typeJson['type'])
         qq=typeOfFile.find("/")
         
+        #Getting FHT signature for the file type in variable 'FHT'
         f=open('fht_output/fht_signature_'+typeOfFile[0:qq]+"_"+typeOfFile[qq+1:]+'.json','r')
         FHT = json.loads(f.read())
         f.close()
         
+        #Getting FHT max values for first 16 bytes from the FHT signature- Used for correlation later on
         FHT_MAX_VALUES=[]
         fht_bytes= [FHT["0"],FHT["1"],FHT["2"],FHT["3"],FHT["4"],FHT["5"],FHT["6"],FHT["7"],FHT["8"],FHT["9"],FHT["10"],FHT["11"],FHT["12"],FHT["13"],FHT["14"],FHT["15"]]
         for i in fht_bytes:
           max_value=max(i)
           max_index=i.index(max_value)
           FHT_MAX_VALUES.append(max_index)
-#         print FHT_MAX_VALUES
+          #print FHT_MAX_VALUES
         byteFreq=[]
         for i in range(0,16):
             byteFreq.append(0)
@@ -59,8 +65,6 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
         for k in range(0,len(typeJson['test'])):
             
             filePath=sourcePath+typeJson['test'][k]
-            
-            
             for i in range(0,16):
                 byteFreq[i]=0
             try:
@@ -76,8 +80,7 @@ for filepath in iglob(os.path.join(fileR, '*.json')):
                 for j in range(0,ff):
                     x=ord(data[j:(j+1)])
                     byteFreq[j]=x
-#                 print byteFreq[0:4]
-#                 print FHT_MAX_VALUES[0:4]
+                #Analysis: Calculating pearsor coefficient for first 4, 8 and 16 bytes and storing in a text file
                 x=bfcPearsonCoeff(byteFreq[0:4],FHT_MAX_VALUES[0:4])
                 y=bfcPearsonCoeff(byteFreq[0:8],FHT_MAX_VALUES[0:8])
                 z=bfcPearsonCoeff(byteFreq,FHT_MAX_VALUES)

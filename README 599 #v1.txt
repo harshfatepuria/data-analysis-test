@@ -102,8 +102,3 @@ CSCI 599 - Assignment 1 - Team 22
 			-test		path to test dataset json file
 			-output		path to store output file
 
-
-
-
-
-

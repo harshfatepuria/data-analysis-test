@@ -14,7 +14,9 @@
 	     This file is very important because we refer it for the paths to each file in a particular MIME type.
 		 
 	Files Preparation
+	
 	a) Build 'cs599-data-pre' as a java project
+	
 	b) To detect file types and generate .json files
 		java typedetect.runner.TypeDetectRunner
 		

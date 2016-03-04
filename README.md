@@ -7,20 +7,24 @@
 	Example, /Volumes/HARSH/CS599/ORIGINAL/
 
 3. We use Apache Tika on the entire data set to create the following:
-	a.  A summary of the count of different types of files present:  initialSummary.json 
-	b.  A dictionary file for each file type storing the file_type, array of paths to the training data (75%), and array of paths to the testing data (25%)
+
+	a)  A summary of the count of different types of files present:  initialSummary.json 
+
+	b)  A dictionary file for each file type storing the file_type, array of paths to the training data (75%), and array of paths to the testing data (25%)
 	     This file is very important because we refer it for the paths to each file in a particular MIME type.
 		 
 	Files Preparation
 	a) Build 'cs599-data-pre' as a java project
 	b) To detect file types and generate .json files
 		java typedetect.runner.TypeDetectRunner
-	Arguments:
+		
+		Arguments:
 		-data		base data folder
 		-output		folder to store output json files
 		-mimetype	path to custom mimetype.xml (optional)
-					default: use tika default tika-mimetype.xml
-	Files generated as output:
+				default: use tika default tika-mimetype.xml
+		
+		Files generated as output:
 		summary.json		summary of mime diversity
 		allRecords.json		indicates detected type of each file
 		byType/*.json		list of files path for each detected type

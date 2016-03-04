@@ -1,6 +1,8 @@
 ﻿README 
 CSCI 599 - Assignment 1 - Team 22
 
+[By default, all D3 visualizations along with JSON files are already prepared for viewing. To see the visualizations, 
+ kindly open any of the *.html files or visit the project website at http://harshfatepuria.github.io ]
 
 1. We use D3 on the file distribution available in GitHub to create a Pie chart (completeDataPieChart.html) indicating the existing MIME diversity of the TREC- DD-Polar dataset
 
